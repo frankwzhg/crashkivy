@@ -1,0 +1,60 @@
+<WrappedLabel@Label>:
+    size_hint_y: None
+    height: self.texture_size[1] + (self.texture_size[1]/2)
+    markup: True
+
+<KivyTutoRoot>:
+    orientation: "vertical"
+    ActionBar:
+        ActionView:
+            ActionPrevious:
+                title: ""
+                with_previous: False
+            ActionOverflow:
+                ActionButton:
+                    text: "settings"
+                    on_press: app.open_settings()
+
+    ScreenManager:
+        id: kivy_screen_manger
+        StartScreen:
+            name: "start_screen"
+        AboutScreen:
+            id: about_screen
+            name: "about_screen"
+
+<StartScreen@Screen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: root.width * 0.02, root.height * 0.02
+
+        WrappedLabel:
+            text: '[b]kivy calculate[/b]'
+            font_size:min(root.height, root.width)/10
+        Button:
+            text: 'Addition'
+        Button:
+            text: 'Subtraction'
+        Button:
+            text: 'Multiplication'
+        Button:
+            text: 'Division'
+        Button:
+            text: 'Mix'
+        Button:
+            text: 'About this App'
+            on_release: app.root.changeScreen(self.text)
+
+<AboutScreen@Screen>:
+    BoxLayout:
+        padding: root.width * 0.02, root.height * 0.02
+        Label:
+            text: app.getText()
+            halign: "center"
+            markup: True
+            font_size: root.height / 20
+            text_size: self.width, None
+            center_y: .5
+            on_ref_press: app.on_ref_press(*args)
+
+
